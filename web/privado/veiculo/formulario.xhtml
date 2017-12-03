@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:form id="formEdicao">
+        <h:panelGroup rendered="#{controleVeiculo.editando}">
+            <div class="ui-fluid">
+                <p:messages/>
+                <p:panelGrid columns="2" columnClasses="ui-grid-col-2, ui-grid-col-20"
+                             layout="grid" styleClass="ui-panelgrid-blank">
+                    <f:facet name="header">
+                        <p:outputLabel value="Edição de Veículos"/>
+                    </f:facet>
+                    <p:outputLabel for="txtID" value="ID"/>
+                    <p:inputText id="txtID" value="#{controleVeiculo.objeto.id}" readonly="true"
+                                 size="10"/>
+                    <p:outputLabel for="txtMarca" value="Marca"/>
+                    <p:inputText id="txtMarca" value="#{controleVeiculo.objeto.marca}"
+                                 size="50" maxlength="50"
+                                 placeholder="Obrigatório"/>
+                    <p:outputLabel for="txtModelo" value="Modelo"/>
+                    <p:inputText id="txtModelo" value="#{controleVeiculo.objeto.modelo}"
+                                 size="20" maxlength="20"
+                                 placeholder="Obrigatório"/>
+                    <p:outputLabel for="txtCor" value="Cor"/>
+                    <p:inputText id="txtCor" value="#{controleVeiculo.objeto.cor}"
+                                 size="20" maxlength="20"
+                                 placeholder="Obrigatório"/>
+                    <p:outputLabel for="txtAno" value="Ano"/>
+                    <p:inputNumber id="txtAno" value="#{controleVeiculo.objeto.anoFabricacao}"
+                                   maxlength="4"/>
+                    <p:outputLabel for="txtPlaca" value="Placa"/>
+                    <p:inputText id="txtPlaca" value="#{controleVeiculo.objeto.placa}"
+                                 size="7" maxlength="7"
+                                 placeholder="Obrigatório"/>
+                    <p:outputLabel for="selectCliente" value="Cliente"/>
+                    <p:selectOneMenu id="selectCliente" value="#{controleVeiculo.objeto.cliente}">
+                        <f:converter converterId="converterCliente"/>
+                        <f:selectItem noSelectionOption="true"
+                                      itemLabel="Selecione um registro"/>
+                        <f:selectItems value="#{controleVeiculo.daoCliente.listaTodos}"
+                                       var="s" itemLabel="#{s.nome}"/>
+                    </p:selectOneMenu>
+                    <p:commandButton value="Salvar" icon="ui-icon-disk"
+                                     actionListener="#{controleVeiculo.salvar()}"
+                                     update="formEdicao :formListagem"/>
+                </p:panelGrid>
+            </div>
+        </h:panelGroup>
+    </h:form>
+</html>
+
